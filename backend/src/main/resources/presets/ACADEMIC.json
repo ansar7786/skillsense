@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "questions": [
+    {
+      "key": "clarity_of_teaching",
+      "type": "RATING",
+      "section": "Teaching Effectiveness",
+      "prompt": "How clear and structured are the classroom lectures and concept explanations?",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Poor", "maxLabel": "Excellent" }
+    },
+    {
+      "key": "course_pace",
+      "type": "RATING",
+      "section": "Course Delivery",
+      "prompt": "Rate the pace of syllabus coverage throughout the current term.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Too Slow / Rushed", "maxLabel": "Optimal Pace" }
+    },
+    {
+      "key": "study_material",
+      "type": "RATING",
+      "section": "Learning Resources",
+      "prompt": "Rate the relevance and completeness of recommended textbooks, notes, and LMS resources.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Inadequate", "maxLabel": "Comprehensive" }
+    },
+    {
+      "key": "fairness_of_assessment",
+      "type": "RATING",
+      "section": "Evaluation",
+      "prompt": "How fair, timely, and transparent were the internal assessments and lab evaluations?",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Biased / Delayed", "maxLabel": "Very Fair & Timely" }
+    },
+    {
+      "key": "practical_relevance",
+      "type": "RATING",
+      "section": "Practical Learning",
+      "prompt": "Rate the practical hands-on exercises and real-world applicability of this curriculum.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Theoretical Only", "maxLabel": "Highly Practical" }
+    },
+    {
+      "key": "overall_rating",
+      "type": "RATING",
+      "section": "Summary",
+      "prompt": "Rate your overall academic learning experience in this department this semester.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Unsatisfactory", "maxLabel": "Outstanding" }
+    },
+    {
+      "key": "academic_suggestions",
+      "type": "TEXT",
+      "section": "Feedback",
+      "prompt": "What specific improvements or curriculum adjustments would you recommend?",
+      "required": false,
+      "maxLength": 500
+    }
+  ]
+}

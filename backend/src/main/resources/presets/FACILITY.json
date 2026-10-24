@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "questions": [
+    {
+      "key": "hostel_rooms",
+      "type": "RATING",
+      "section": "Hostel & Living",
+      "prompt": "Rate the cleanliness, maintenance, and space in your hostel rooms.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Substandard", "maxLabel": "Excellent" }
+    },
+    {
+      "key": "mess_food",
+      "type": "RATING",
+      "section": "Dining",
+      "prompt": "Rate the hygiene, variety, and nutritional value of mess food.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Very Poor", "maxLabel": "Very Good" }
+    },
+    {
+      "key": "wifi_connectivity",
+      "type": "RATING",
+      "section": "IT Infrastructure",
+      "prompt": "Rate the reliability and speed of campus and hostel Wi-Fi networks.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Frequent Outages", "maxLabel": "Fast & Stable" }
+    },
+    {
+      "key": "library_resources",
+      "type": "RATING",
+      "section": "Learning Spaces",
+      "prompt": "Rate library facilities, available seating, reading rooms, and digital access.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Insufficient", "maxLabel": "State of the Art" }
+    },
+    {
+      "key": "lab_equipment",
+      "type": "RATING",
+      "section": "Learning Spaces",
+      "prompt": "Rate the condition, modern software tools, and availability of lab systems.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Outdated / Broken", "maxLabel": "Up-to-date & Working" }
+    },
+    {
+      "key": "transport_services",
+      "type": "RATING",
+      "section": "Logistics",
+      "prompt": "Rate college bus punctuality, routes, and fleet maintenance.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Unreliable", "maxLabel": "Punctual & Safe" }
+    },
+    {
+      "key": "sports_facilities",
+      "type": "RATING",
+      "section": "Recreation",
+      "prompt": "Rate sports equipment, grounds, gym facilities, and lighting.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Poorly Maintained", "maxLabel": "Well Maintained" }
+    },
+    {
+      "key": "campus_cleanliness",
+      "type": "RATING",
+      "section": "Hygiene",
+      "prompt": "Rate general campus sanitation, washrooms, and waste disposal.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Unhygienic", "maxLabel": "Spotless" }
+    },
+    {
+      "key": "priority_fix",
+      "type": "SINGLE_CHOICE",
+      "section": "Action Priority",
+      "prompt": "Which single facility should campus management address with the highest urgency?",
+      "required": true,
+      "options": [
+        { "value": "mess", "label": "Mess & Cafeteria Food Quality" },
+        { "value": "wifi", "label": "Hostel Wi-Fi & Internet Speed" },
+        { "value": "hostel", "label": "Hostel Room Maintenance & Water" },
+        { "value": "library", "label": "Library Space & Air Conditioning" },
+        { "value": "labs", "label": "Computer Labs & Workstations" },
+        { "value": "transport", "label": "College Bus Service & Schedule" }
+      ]
+    },
+    {
+      "key": "facility_comments",
+      "type": "TEXT",
+      "section": "Feedback",
+      "prompt": "Provide any specific locations or facility complaints you would like resolved.",
+      "required": false,
+      "maxLength": 500
+    }
+  ]
+}

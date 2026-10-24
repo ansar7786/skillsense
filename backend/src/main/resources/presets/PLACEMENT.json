@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "questions": [
+    {
+      "key": "java_skill",
+      "type": "RATING",
+      "section": "Technical Skills",
+      "prompt": "How confident are you in core Java and object-oriented programming?",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Beginner", "maxLabel": "Expert" },
+      "scoring": { "skill": "java", "weight": 1.0 }
+    },
+    {
+      "key": "python_skill",
+      "type": "RATING",
+      "section": "Technical Skills",
+      "prompt": "How confident are you in Python scripting and data structures?",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Beginner", "maxLabel": "Expert" },
+      "scoring": { "skill": "python", "weight": 1.0 }
+    },
+    {
+      "key": "dsa_skill",
+      "type": "RATING",
+      "section": "Technical Skills",
+      "prompt": "Rate your proficiency in Data Structures and Algorithms (LeetCode / Codeforces).",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Beginner", "maxLabel": "Expert" },
+      "scoring": { "skill": "dsa", "weight": 2.0 }
+    },
+    {
+      "key": "aptitude_skill",
+      "type": "RATING",
+      "section": "General Preparedness",
+      "prompt": "Rate your aptitude test readiness (Quantitative, Logical, Verbal).",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Beginner", "maxLabel": "Expert" },
+      "scoring": { "skill": "aptitude", "weight": 1.0 }
+    },
+    {
+      "key": "communication_skill",
+      "type": "RATING",
+      "section": "General Preparedness",
+      "prompt": "Rate your confidence in English technical communication and group discussions.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Beginner", "maxLabel": "Expert" },
+      "scoring": { "skill": "communication", "weight": 1.0 }
+    },
+    {
+      "key": "mock_interviews",
+      "type": "SINGLE_CHOICE",
+      "section": "Interview Experience",
+      "prompt": "How many technical mock interviews have you given this semester?",
+      "required": true,
+      "options": [
+        { "value": "0", "label": "None", "score": 0 },
+        { "value": "1-2", "label": "1 to 2 interviews", "score": 50 },
+        { "value": "3+", "label": "3 or more interviews", "score": 100 }
+      ],
+      "scoring": { "skill": "interview", "weight": 1.0 }
+    },
+    {
+      "key": "projects_completed",
+      "type": "SINGLE_CHOICE",
+      "section": "Portfolio & Practical Experience",
+      "prompt": "How many full-stack or major software projects have you deployed?",
+      "required": true,
+      "options": [
+        { "value": "0", "label": "No completed projects", "score": 0 },
+        { "value": "1", "label": "1 deployed project", "score": 50 },
+        { "value": "2+", "label": "2 or more deployed projects", "score": 100 }
+      ],
+      "scoring": { "skill": "project", "weight": 1.0 }
+    },
+    {
+      "key": "has_certification",
+      "type": "YES_NO",
+      "section": "Credentials",
+      "prompt": "Do you hold any recognized cloud or industry technical certification (e.g. AWS, GCP, Oracle)?",
+      "required": true,
+      "scoring": { "skill": "certification", "weight": 1.0 }
+    },
+    {
+      "key": "target_role",
+      "type": "SINGLE_CHOICE",
+      "section": "Aspirations",
+      "prompt": "Which primary placement role are you targeting?",
+      "required": true,
+      "options": [
+        { "value": "swe", "label": "Software Development Engineer (SDE / SWE)" },
+        { "value": "data", "label": "Data Analyst / Data Scientist" },
+        { "value": "cloud", "label": "Cloud / DevOps Engineer" },
+        { "value": "qa", "label": "Quality Assurance / SDET" },
+        { "value": "other", "label": "Other Core / Tech Role" }
+      ]
+    },
+    {
+      "key": "blockers",
+      "type": "TEXT",
+      "section": "Feedback",
+      "prompt": "What is the single biggest blocker stopping you from being placement-ready?",
+      "required": false,
+      "maxLength": 500
+    }
+  ]
+}

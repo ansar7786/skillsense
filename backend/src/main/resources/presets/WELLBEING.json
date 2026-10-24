@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "questions": [
+    {
+      "key": "workload_manageable",
+      "type": "RATING",
+      "section": "Academic Balance",
+      "prompt": "How manageable do you find your current assignment, lab, and exam workload?",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Overwhelming", "maxLabel": "Well Balanced" }
+    },
+    {
+      "key": "faculty_support",
+      "type": "RATING",
+      "section": "Mentorship",
+      "prompt": "How approachable and supportive are faculty members when you need academic or personal guidance?",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Unapproachable", "maxLabel": "Very Supportive" }
+    },
+    {
+      "key": "sense_of_belonging",
+      "type": "RATING",
+      "section": "Campus Culture",
+      "prompt": "Do you feel welcomed, valued, and a sense of belonging in the student community?",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Isolated", "maxLabel": "Strong Belonging" }
+    },
+    {
+      "key": "knows_counselling",
+      "type": "YES_NO",
+      "section": "Support Awareness",
+      "prompt": "Are you aware of the college's confidential mental health and student counseling services?",
+      "required": true
+    },
+    {
+      "key": "wellbeing_suggestions",
+      "type": "TEXT",
+      "section": "Open Feedback",
+      "prompt": "What additional support or initiatives would best promote student mental and emotional wellbeing?",
+      "required": false,
+      "maxLength": 500
+    }
+  ]
+}

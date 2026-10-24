@@ -1,0 +1,29 @@
+server:
+  port: ${PORT:9000}
+
+spring:
+  application:
+    name: skillsense-backend
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/skillsense?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USER:skillsense}
+    password: ${DB_PASSWORD:skillsense_pass}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      initialization-fail-timeout: -1
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+
+app:
+  cors:
+    allowed-origins: ${CORS_ORIGIN:http://localhost:5173}
+  jwt:
+    secret: ${JWT_SECRET:skillsense_secret_key_minimum_256_bits_length_for_hs256_algorithm_123456}
+  analytics:
+    url: ${ANALYTICS_URL:http://localhost:8001}
+  ai:
+    daily-limit: ${AI_DAILY_LIMIT:50}

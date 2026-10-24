@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "questions": [
+    {
+      "key": "overall_rating",
+      "type": "RATING",
+      "section": "Event Overview",
+      "prompt": "How would you rate your overall experience at this event?",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Poor", "maxLabel": "Exceptional" }
+    },
+    {
+      "key": "organisation",
+      "type": "RATING",
+      "section": "Execution",
+      "prompt": "Rate the event coordination, punctuality of schedule, and volunteer support.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Disorganised", "maxLabel": "Seamless" }
+    },
+    {
+      "key": "content_quality",
+      "type": "RATING",
+      "section": "Programming",
+      "prompt": "Rate the quality, relevance, and engagement level of guest speakers and activities.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Unengaging", "maxLabel": "Inspiring" }
+    },
+    {
+      "key": "venue_comfort",
+      "type": "RATING",
+      "section": "Logistics",
+      "prompt": "Rate the venue layout, stage visibility, audio clarity, and seating comfort.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Uncomfortable", "maxLabel": "Excellent" }
+    },
+    {
+      "key": "would_attend_again",
+      "type": "YES_NO",
+      "section": "Follow-up",
+      "prompt": "Would you attend future editions of this event or recommend it to peers?",
+      "required": true
+    },
+    {
+      "key": "event_suggestions",
+      "type": "TEXT",
+      "section": "Suggestions",
+      "prompt": "What should the organizing committee change or introduce for next year?",
+      "required": false,
+      "maxLength": 500
+    }
+  ]
+}

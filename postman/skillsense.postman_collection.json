@@ -1,0 +1,742 @@
+{
+  "info": {
+    "name": "SkillSense API Collection",
+    "description": "Comprehensive API collection for SkillSense survey-and-insights platform across all roles and resources.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:9000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "surveyId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "termId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Auth",
+      "item": [
+        {
+          "name": "Login as Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.token) {",
+                  "    pm.collectionVariables.set('token', jsonData.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"collegeId\": \"admin\",\n  \"password\": \"Demo@1234\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User Profile (/me)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/auth/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"Demo@1234\",\n  \"newPassword\": \"NewDemo@1234\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/change-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "change-password"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Admin Users",
+      "item": [
+        {
+          "name": "List Users (Paginated & Filtered)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?page=0&size=20&search=&role=&branch=",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "20" },
+                { "key": "search", "value": "" },
+                { "key": "role", "value": "" },
+                { "key": "branch", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"collegeId\": \"26POSTMAN_STU\",\n  \"name\": \"Postman Student\",\n  \"email\": \"postman_stu@skillsense.edu\",\n  \"role\": \"STUDENT\",\n  \"branch\": \"CSE\",\n  \"studyYear\": 3,\n  \"section\": \"A\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman Student Updated\",\n  \"email\": \"postman_updated@skillsense.edu\",\n  \"role\": \"STUDENT\",\n  \"branch\": \"CSE\",\n  \"studyYear\": 4,\n  \"section\": \"B\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Deactivate / Reactivate User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}/deactivate",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{userId}}", "deactivate"]
+            }
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{userId}}/reset-password",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{userId}}", "reset-password"]
+            }
+          }
+        },
+        {
+          "name": "Import Users via CSV",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/import",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "import"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "03 Academic Terms",
+      "item": [
+        {
+          "name": "List All Academic Terms",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/terms",
+              "host": ["{{baseUrl}}"],
+              "path": ["terms"]
+            }
+          }
+        },
+        {
+          "name": "Create Academic Term",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"2027-28 Odd\",\n  \"startDate\": \"2027-07-01\",\n  \"endDate\": \"2027-12-31\",\n  \"isCurrent\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/terms",
+              "host": ["{{baseUrl}}"],
+              "path": ["terms"]
+            }
+          }
+        },
+        {
+          "name": "Set Current Term",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/terms/{{termId}}/current",
+              "host": ["{{baseUrl}}"],
+              "path": ["terms", "{{termId}}", "current"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Surveys & Engine",
+      "item": [
+        {
+          "name": "Get Category Preset (PLACEMENT)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/survey-presets/PLACEMENT",
+              "host": ["{{baseUrl}}"],
+              "path": ["survey-presets", "PLACEMENT"]
+            }
+          }
+        },
+        {
+          "name": "Calculate Eligible Student Count",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scope\": \"ALL\",\n  \"branches\": [],\n  \"years\": [],\n  \"sections\": []\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/surveys/eligible-count",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "eligible-count"]
+            }
+          }
+        },
+        {
+          "name": "List Surveys (Filtered by Scope)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys?termId=&category=&status=",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys"],
+              "query": [
+                { "key": "termId", "value": "" },
+                { "key": "category", "value": "" },
+                { "key": "status", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Survey Detail",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}"]
+            }
+          }
+        },
+        {
+          "name": "Activate Survey",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/activate",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "activate"]
+            }
+          }
+        },
+        {
+          "name": "Close Survey",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/close",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "close"]
+            }
+          }
+        },
+        {
+          "name": "Create New Version of Survey",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"termId\": {{termId}}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/new-version",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "new-version"]
+            }
+          }
+        },
+        {
+          "name": "Get Survey Participation Progress",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/progress",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "progress"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Student Endpoints",
+      "item": [
+        {
+          "name": "Get My Assigned Surveys",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/my/surveys",
+              "host": ["{{baseUrl}}"],
+              "path": ["my", "surveys"]
+            }
+          }
+        },
+        {
+          "name": "Get Assigned Survey Detail (Sanitized)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/my/surveys/{{surveyId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["my", "surveys", "{{surveyId}}"]
+            }
+          }
+        },
+        {
+          "name": "Submit Survey Response",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"answers\": {\n    \"java_skill\": 4,\n    \"python_skill\": 3,\n    \"dsa_skill\": 4,\n    \"aptitude_skill\": 4,\n    \"communication_skill\": 3,\n    \"mock_interviews\": \"1-2\",\n    \"projects_completed\": \"2\",\n    \"has_certification\": \"YES\",\n    \"target_role\": \"sde\",\n    \"main_blocker\": \"Balancing semester exams with coding prep\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/my/surveys/{{surveyId}}/submit",
+              "host": ["{{baseUrl}}"],
+              "path": ["my", "surveys", "{{surveyId}}", "submit"]
+            }
+          }
+        },
+        {
+          "name": "Get My Scored Result (Non-Anonymous)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/my/surveys/{{surveyId}}/result",
+              "host": ["{{baseUrl}}"],
+              "path": ["my", "surveys", "{{surveyId}}", "result"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Analytics & AI",
+      "item": [
+        {
+          "name": "Get Survey Analytics & Readiness",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/analytics",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "analytics"]
+            }
+          }
+        },
+        {
+          "name": "Get Survey Trend (Term-over-Term)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/trend",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "trend"]
+            }
+          }
+        },
+        {
+          "name": "Get AI Insights & Recommendations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/insights?regenerate=false",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "insights"],
+              "query": [
+                { "key": "regenerate", "value": "false" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Shuffled Comments & Text Themes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/texts",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "texts"]
+            }
+          }
+        },
+        {
+          "name": "Get Officials Dashboard Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dashboard/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["dashboard", "summary"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 Report Exports",
+      "item": [
+        {
+          "name": "Export PDF Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/export?format=pdf",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "export"],
+              "query": [
+                { "key": "format", "value": "pdf" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Export Excel Report (XLSX)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/surveys/{{surveyId}}/export?format=xlsx",
+              "host": ["{{baseUrl}}"],
+              "path": ["surveys", "{{surveyId}}", "export"],
+              "query": [
+                { "key": "format", "value": "xlsx" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "08 Seeding & Benchmarking",
+      "item": [
+        {
+          "name": "Seed Demo Profile Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/seed/demo",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "seed", "demo"]
+            }
+          }
+        },
+        {
+          "name": "Seed 2,000 Responses & Run Benchmark",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/admin/seed/perf",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "seed", "perf"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

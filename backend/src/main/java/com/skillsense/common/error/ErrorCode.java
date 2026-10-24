@@ -1,0 +1,14 @@
+package com.skillsense.common.error;
+
+public enum ErrorCode {
+    VALIDATION_FAILED,
+    UNAUTHENTICATED,
+    FORBIDDEN,
+    NOT_FOUND,
+    ALREADY_SUBMITTED,
+    SURVEY_NOT_ACTIVE,
+    NOT_ELIGIBLE,
+    ACCOUNT_LOCKED,
+    ANALYTICS_UNAVAILABLE,
+    BAD_REQUEST
+}

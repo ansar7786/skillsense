@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "questions": [
+    {
+      "key": "sample_single_choice",
+      "type": "SINGLE_CHOICE",
+      "section": "General Preferences",
+      "prompt": "What is your primary preferred format for technical workshops?",
+      "required": true,
+      "options": [
+        { "value": "in_person", "label": "Hands-on in-person classroom" },
+        { "value": "hybrid", "label": "Hybrid interactive session" },
+        { "value": "self_paced", "label": "Recorded self-paced module" }
+      ]
+    },
+    {
+      "key": "sample_multi_choice",
+      "type": "MULTI_CHOICE",
+      "section": "Activities",
+      "prompt": "Select all student technical clubs or chapters you actively participate in.",
+      "required": true,
+      "options": [
+        { "value": "acm_ieee", "label": "ACM / IEEE Student Branch" },
+        { "value": "gdsc", "label": "Google Developer Student Club" },
+        { "value": "robotics", "label": "Robotics & Hardware Society" },
+        { "value": "open_source", "label": "Open Source & Competitive Coding" }
+      ]
+    },
+    {
+      "key": "sample_rating",
+      "type": "RATING",
+      "section": "Infrastructure",
+      "prompt": "Rate the overall learning environment and digital infrastructure provided by the college.",
+      "required": true,
+      "rating": { "min": 1, "max": 5, "minLabel": "Needs Improvement", "maxLabel": "World Class" }
+    },
+    {
+      "key": "sample_yes_no",
+      "type": "YES_NO",
+      "section": "Academic Schedule",
+      "prompt": "Are you satisfied with the schedule and timetable allocation for this semester?",
+      "required": true
+    },
+    {
+      "key": "sample_number",
+      "type": "NUMBER",
+      "section": "Study Habits",
+      "prompt": "On average, how many hours per week do you dedicate to self-directed coding or study?",
+      "required": true,
+      "min": 0,
+      "max": 80
+    },
+    {
+      "key": "sample_text",
+      "type": "TEXT",
+      "section": "Open Feedback",
+      "prompt": "Share any suggestions, ideas, or comments you would like management to review.",
+      "required": false,
+      "maxLength": 500
+    }
+  ]
+}

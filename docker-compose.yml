@@ -1,0 +1,80 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: skillsense-mysql
+    restart: unless-stopped
+    command: --log-bin-trust-function-creators=1
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: skillsense
+      MYSQL_USER: ${MYSQL_USER:-skillsense}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-skillsense_pass}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_pass}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root_pass}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  analytics:
+    build:
+      context: ./analytics
+      dockerfile: Dockerfile
+    container_name: skillsense-analytics
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash}
+      GEMINI_TIMEOUT_SECONDS: ${GEMINI_TIMEOUT_SECONDS:-20}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: skillsense-backend
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    environment:
+      PORT: 9000
+      DB_URL: jdbc:mysql://mysql:3306/skillsense?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USER: ${MYSQL_USER:-skillsense}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-skillsense_pass}
+      JWT_SECRET: ${JWT_SECRET:-skillsense_secret_key_minimum_256_bits_length_for_hs256_algorithm_123456}
+      ANALYTICS_URL: http://analytics:8001
+      CORS_ORIGIN: http://localhost:5173
+      AI_DAILY_LIMIT: ${AI_DAILY_LIMIT:-50}
+      SPRING_PROFILES_ACTIVE: demo
+    depends_on:
+      mysql:
+        condition: service_healthy
+      analytics:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://localhost:9000/api
+    container_name: skillsense-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
