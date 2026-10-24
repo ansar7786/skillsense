@@ -1,88 +1,79 @@
 # SkillSense
 
-SkillSense is a unified survey and insights platform for colleges. It collects responses across various survey categories, calculates readiness scores and skill gaps, and produces AI-driven recommendations.
-
-This repository is organized as a monorepo containing the following components:
-- **MySQL 8**: Database service managed via Docker Compose.
-- **Backend**: Spring Boot 3.3 (Java 21, Maven) REST API.
-- **Analytics**: Stateless FastAPI Python service for numerical calculations and AI insights.
-- **Frontend**: React 18 single-page application built with Vite.
+SkillSense is a unified survey and student analytics platform for engineering institutions. It collects student feedback across academic, placement readiness, facility, event, and wellbeing categories, computes objective readiness scores and skill gap analyses, provides K=5 anonymity guarantees, and synthesizes executive recommendations via Gemini AI (with a zero-dependency rules engine fallback).
 
 ---
 
-## Prerequisites
+## Architecture & Monorepo Structure
 
-- **Java**: JDK 21+
-- **Maven**: 3.9+ (or use the included Maven wrapper `backend\mvnw.cmd`)
-- **Python**: 3.11+ (Python 3.11–3.14 supported)
-- **Node.js**: v18+ and `npm`
-- **Docker Desktop**: For running MySQL 8 container
+- **Database**: MySQL 8.4 with BEFORE INSERT and BEFORE UPDATE anonymity & immutability triggers.
+- **Backend (`backend/`)**: Spring Boot 3.3.4 (Java 21, Maven) REST API, JWT auth, RBAC, JPA/Flyway, Apache POI / OpenPDF reporting.
+- **Analytics (`analytics/`)**: FastAPI (Python 3.11+, Pandas, Uvicorn) microservice for stats aggregation, satisfaction index, and Gemini LLM insights.
+- **Frontend (`frontend/`)**: React 18, Vite, React Router 6, Chart.js, mobile-responsive accessible UI.
+- **Documentation (`docs/`)**: Complete specification, deployment & handover manual, security review, performance benchmarks, deviations log, and Postman collection.
 
 ---
 
-## Environment Setup
+## Quick Start (Docker Compose — Recommended)
 
-1. Copy `.env.example` to `.env` in the repository root:
+Start the complete application stack (MySQL, Spring Boot Backend, FastAPI Analytics, and Nginx Frontend) with one command:
+
 ```powershell
+# 1. Copy environment template
 Copy-Item .env.example .env
+
+# 2. Build and start all 4 services in the background
+docker compose up --build -d
 ```
 
-2. Also verify frontend environment variables in `frontend\.env`:
-```powershell
-VITE_API_URL=http://localhost:9000/api
-```
+### Accessing the Platform
 
----
+| Service | URL / Port | Credentials / Purpose |
+| :--- | :--- | :--- |
+| **Frontend Application** | [http://localhost:5173](http://localhost:5173) | Single-page student & official app |
+| **Spring Boot REST API** | [http://localhost:9000/api](http://localhost:9000/api) | Health: `GET http://localhost:9000/api/health` |
+| **FastAPI Analytics** | [http://localhost:8001](http://localhost:8001) | Health: `GET http://localhost:8001/health` |
+| **MySQL Database** | `localhost:3306` | User: `skillsense`, Database: `skillsense` |
 
-## Running Services (Windows PowerShell)
-
-### 1. MySQL Database
-
-Start the MySQL container in the background:
-```powershell
-docker compose up -d mysql
-```
-
-Check health status:
-```powershell
-docker compose ps
-```
-
-To stop MySQL:
+To stop all services:
 ```powershell
 docker compose down
 ```
 
 ---
 
-### 2. Spring Boot Backend
+## Local Development (Without Docker for App Services)
 
-From the repository root or `backend` folder:
+### Prerequisites
+
+- **Java**: JDK 21+
+- **Maven**: 3.9+ (or use `backend\mvnw.cmd`)
+- **Python**: 3.11+
+- **Node.js**: v18+ and `npm`
+- **Docker Desktop**: For running the MySQL 8 container
+
+### 1. Environment Setup
+
+```powershell
+Copy-Item .env.example .env
+```
+
+### 2. Start MySQL
+
+```powershell
+docker compose up -d mysql
+```
+
+### 3. Start Spring Boot Backend
+
 ```powershell
 cd backend
 .\mvnw.cmd spring-boot:run
 ```
-*(Alternatively, if Maven is in your PATH: `mvn spring-boot:run`)*
+Server runs on `http://localhost:9000`. Health check: `GET http://localhost:9000/api/health`.
 
-The backend server starts on port `9000`:
-```text
-http://localhost:9000
-```
+### 4. Start FastAPI Analytics Service
 
-Verify backend health:
-```powershell
-Invoke-RestMethod -Uri "http://localhost:9000/api/health"
-```
-Expected response:
-```json
-{"status":"ok"}
-```
-
----
-
-### 3. FastAPI Analytics Service
-
-From the repository root or `analytics` folder:
 ```powershell
 cd analytics
 python -m venv venv
@@ -90,55 +81,77 @@ python -m venv venv
 pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
 ```
+Server runs on `http://localhost:8001`. Health check: `GET http://localhost:8001/health`.
 
-The analytics service starts on:
-```text
-http://localhost:8001
-```
+### 5. Start React Frontend
 
-Verify analytics health:
-```powershell
-Invoke-RestMethod -Uri "http://localhost:8001/health"
-```
-Expected response:
-```json
-{"status":"ok"}
-```
-
-Run tests:
-```powershell
-cd analytics
-.\venv\Scripts\pytest
-```
-
----
-
-### 4. React Frontend
-
-From the repository root or `frontend` folder:
 ```powershell
 cd frontend
 npm install
 npm run dev
 ```
+Development server runs on `http://localhost:5173`.
 
-The frontend development server starts on:
-```text
-http://localhost:5173
+---
+
+## Running Test Suites
+
+### Backend Tests (JUnit 5, Spring Boot Test)
+```powershell
+cd backend
+.\mvnw.cmd test
 ```
 
-Open `http://localhost:5173` in a browser. When the backend is running, the page will display:
-```text
-backend: ok
+### Analytics Tests (FastAPI / pytest)
+```powershell
+cd analytics
+.\venv\Scripts\pytest
+```
+
+### Frontend Tests (Vitest & React Testing Library)
+```powershell
+cd frontend
+npm test -- --run
+```
+
+### Production Build Verification
+```powershell
+cd frontend
+npm run build
 ```
 
 ---
 
-## Phase 0 Health Checks Summary
+## Demo Accounts & Seed Profiles
 
-| Service | Port | Endpoint | Expected Output |
-| :--- | :--- | :--- | :--- |
-| **MySQL** | `3306` | Docker healthcheck | healthy |
-| **Backend** | `9000` | `GET http://localhost:9000/api/health` | `{"status":"ok"}` |
-| **Analytics** | `8001` | `GET http://localhost:8001/health` | `{"status":"ok"}` |
-| **Frontend** | `5173` | `http://localhost:5173` | Displays `backend: ok` |
+The database can be seeded automatically via admin endpoints:
+
+### Seeder Endpoints (Admin role required)
+- **Demo Profile**: `POST http://localhost:9000/api/admin/seed/demo`  
+  Seeds 125 users, 2 academic terms, and 6 surveys (Placement v1 [85 responses], Placement v2 [70 responses], Course Feedback DBMS [60 responses, IT n=3 suppressed], Hostel & Facility [90 responses], Wellbeing Pulse [4 responses], and Tech Fest [Draft]).
+- **Performance Benchmark**: `POST http://localhost:9000/api/admin/seed/perf`  
+  Injects 2,000 anonymous responses and executes live cold/warm benchmark latency measurements.
+
+### Default Demo Accounts (Password: `Demo@1234`)
+
+| Role | College ID | Context / Department |
+| :--- | :--- | :--- |
+| **ADMIN** | `admin` | Institutional Administrator |
+| **PLACEMENT_OFFICER** | `po01` | Placement & Career Cell |
+| **HOD** | `hod_cse` | Head of Computer Science & Engineering |
+| **FACULTY** | `fac01`, `fac02` | Teaching Faculty |
+| **STUDENT** | `21CSE001` – `21CSE060` | CSE Students (Years 2–4, Sections A & B) |
+| **STUDENT** | `21IT001` – `21IT030` | IT Students |
+| **STUDENT** | `21ECE001` – `21ECE030` | ECE Students |
+
+---
+
+## Documentation Index
+
+- [`docs/SKILLSENSE_SPEC.md`](docs/SKILLSENSE_SPEC.md): Complete product design and system specification.
+- [`docs/HANDOVER.md`](docs/HANDOVER.md): Phase 12 deployment, operations, and system handover guide.
+- [`docs/SECURITY_REVIEW.md`](docs/SECURITY_REVIEW.md): Exhaustive security checklist and audit findings.
+- [`docs/PERFORMANCE.md`](docs/PERFORMANCE.md): 2,000-cohort empirical benchmark measurements.
+- [`docs/DEVIATIONS.md`](docs/DEVIATIONS.md): Architectural deviations and rationale log.
+- [`postman/skillsense.postman_collection.json`](postman/skillsense.postman_collection.json): Complete Postman API collection.
+
