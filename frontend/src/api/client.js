@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:9000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 const client = axios.create({
   baseURL: API_BASE_URL,
@@ -28,7 +28,10 @@ client.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('skillsense_token');
       localStorage.removeItem('skillsense_user');
-      if (typeof window !== 'undefined' && !window.location.pathname.startsWith('/login')) {
+      const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+      const isPublic = pathname === '/' || pathname.startsWith('/login') || pathname === '/403' || pathname === '/404';
+      const isAuthCheck = error.config?.url?.includes('/auth/me');
+      if (typeof window !== 'undefined' && !isPublic && !isAuthCheck) {
         window.location.href = '/login';
       }
     }

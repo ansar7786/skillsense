@@ -1,8 +1,9 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './auth/AuthContext';
+import { AuthProvider } from './auth/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import StudentHomePage from './pages/StudentHomePage';
@@ -16,38 +17,12 @@ import AdminTermsPage from './pages/AdminTermsPage';
 import ForbiddenPage from './pages/ForbiddenPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-function RootRedirect() {
-  const { isAuthenticated, user, loading, mustChangePassword } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="loading-container" role="status">
-        <div className="spinner"></div>
-        <p>Loading...</p>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if (mustChangePassword) {
-    return <Navigate to="/change-password" replace />;
-  }
-
-  if (user?.role === 'STUDENT') {
-    return <Navigate to="/student" replace />;
-  }
-
-  return <Navigate to="/officials" replace />;
-}
-
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
         {/* Public Routes */}
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/403" element={<ForbiddenPage />} />
         <Route path="/404" element={<NotFoundPage />} />
@@ -147,9 +122,6 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
-        {/* Root Redirect */}
-        <Route path="/" element={<RootRedirect />} />
 
         {/* Catch-all 404 */}
         <Route path="*" element={<Navigate to="/404" replace />} />

@@ -2469,4 +2469,566 @@ p {
   }
 }
 
+/* ==========================================================================
+   SkillSense Landing Page Styles (Saas / EdTech Visual Language)
+   - Accent: Indigo (#4f46e5)
+   - Background: Light grey (#f8fafc) & White (#ffffff)
+   - Elevated Neumorphic How-It-Works cards
+   - Floating Glassmorphic Feature cards
+   - Staggered Browser-Mockup Frames for Real Product Showcase
+   ========================================================================== */
+
+.landing-page {
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Top Navigation Bar */
+.landing-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 14px 24px;
+}
+
+.landing-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.landing-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.landing-brand-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: var(--radius-full);
+  margin-left: 6px;
+  letter-spacing: 0.3px;
+}
+
+/* Section Containers */
+.landing-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  position: relative;
+}
+
+.landing-section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px auto;
+}
+
+.landing-section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.landing-section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.landing-section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Hero Section */
+.landing-hero {
+  position: relative;
+  padding: 80px 24px 60px 24px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.landing-hero-bg-blobs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-blob-1 {
+  position: absolute;
+  top: -10%;
+  left: 30%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(224, 231, 255, 0.85) 0%, rgba(248, 250, 252, 0) 70%);
+  filter: blur(40px);
+}
+
+.hero-blob-2 {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(238, 242, 255, 0.9) 0%, rgba(248, 250, 252, 0) 70%);
+  filter: blur(40px);
+}
+
+.landing-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.landing-hero h1 {
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -1.2px;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.landing-hero-tagline {
+  font-size: 1.25rem;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  font-weight: 450;
+}
+
+.landing-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.btn-hero-login {
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-hero-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+}
+
+.btn-hero-secondary {
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-hero-secondary:hover {
+  background: var(--bg-subtle);
+  transform: translateY(-2px);
+}
+
+/* Trust / Mini-Stats Strip */
+.landing-stats-strip {
+  margin: 20px auto 40px auto;
+  max-width: 1100px;
+}
+
+.landing-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.landing-kpi-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  padding: 20px 22px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.landing-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+}
+
+/* "What is SkillSense?" Section */
+.landing-about-card {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px 48px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.landing-about-text {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #334155;
+  margin: 0;
+}
+
+.landing-about-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* "How it Works" Neumorphism Section */
+.how-it-works-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.neumorphic-step-card {
+  background: #f8fafc;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 16px;
+  padding: 28px 22px;
+  box-shadow: 6px 6px 16px rgba(203, 213, 225, 0.45), -6px -6px 16px #ffffff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.neumorphic-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 8px 8px 22px rgba(199, 210, 254, 0.45), -8px -8px 22px #ffffff;
+}
+
+.step-card-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+}
+
+.step-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.step-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Feature Grid with Glassmorphism */
+.features-glass-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.glass-feature-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.glass-feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(199, 210, 254, 0.9);
+  box-shadow: 0 20px 30px -10px rgba(79, 70, 229, 0.12), 0 10px 10px -5px rgba(79, 70, 229, 0.04);
+}
+
+.feature-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feature-icon-wrapper {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.feature-card-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.feature-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* "See It in Action" Staggered Showcase Grid */
+.showcase-staggered-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.showcase-col-offset {
+  margin-top: 48px;
+}
+
+.browser-mockup {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 14px 34px -10px rgba(15, 23, 42, 0.12), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.browser-mockup:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px -10px rgba(79, 70, 229, 0.18), 0 8px 12px -3px rgba(15, 23, 42, 0.08);
+}
+
+.browser-mockup-header {
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.browser-mockup-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.browser-mockup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ef4444; }
+.dot-yellow { background: #eab308; }
+.dot-green { background: #22c55e; }
+
+.browser-mockup-url {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  color: #64748b;
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.browser-mockup-screen {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  background: #f8fafc;
+}
+
+.browser-mockup-caption {
+  padding: 16px 20px;
+  background: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.caption-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.caption-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.caption-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Footer Section */
+.landing-footer {
+  background: #f1f5f9;
+  border-top: 1px solid var(--border-color);
+  padding: 64px 24px 48px 24px;
+  text-align: center;
+}
+
+.landing-footer-content {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.landing-footer-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.4px;
+}
+
+.landing-footer-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.landing-footer-meta {
+  margin-top: 18px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .landing-hero h1 {
+    font-size: 2.8rem;
+  }
+  .landing-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .how-it-works-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .features-glass-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-hero {
+    padding: 50px 16px 40px 16px;
+  }
+  .landing-hero h1 {
+    font-size: 2.2rem;
+  }
+  .landing-hero-tagline {
+    font-size: 1.05rem;
+  }
+  .landing-section {
+    padding: 44px 16px;
+  }
+  .landing-section-title {
+    font-size: 1.75rem;
+  }
+  .landing-about-card {
+    padding: 24px 20px;
+  }
+  .showcase-staggered-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .showcase-col-offset {
+    margin-top: 0;
+  }
+  .features-glass-grid {
+    grid-template-columns: 1fr;
+  }
+  .how-it-works-grid {
+    grid-template-columns: 1fr;
+  }
+  .landing-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 
