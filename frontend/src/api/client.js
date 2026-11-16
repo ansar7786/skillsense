@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+// Always use relative /api so both localhost and public URLs route through the same origin proxy without mixed content or CORS blocks
+const API_BASE_URL = '/api';
 
 const client = axios.create({
   baseURL: API_BASE_URL,
