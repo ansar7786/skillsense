@@ -10,7 +10,19 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'http://localhost:9000',
-        changeOrigin: true
+        changeOrigin: true,
+        headers: {
+          origin: 'http://localhost:5173',
+          Origin: 'http://localhost:5173'
+        },
+        configure: (proxy, _options) => {
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            if (req.headers.origin) {
+              proxyRes.headers['access-control-allow-origin'] = req.headers.origin;
+              proxyRes.headers['access-control-allow-credentials'] = 'true';
+            }
+          });
+        }
       }
     }
   },
